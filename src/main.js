@@ -19,7 +19,6 @@ import App from './App';
 //   routes,
 // });
 
-// console.log($);
 FastClick.attach(document.body);
 
 Vue.config.productionTip = false;

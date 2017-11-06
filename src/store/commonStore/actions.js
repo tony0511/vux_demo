@@ -135,9 +135,9 @@ const actions = {
         console.log(response.msg);
         // Message.error('保存失败，请稍后重试！');
       }
-      commit(types.DT_SAVE_NEW_OR_SAVE_CHANGE_IS_LOADING, { value: false, type: preParams.type }); // 结束loading
+      commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
     } catch (error) {
-      commit(types.DT_SAVE_NEW_OR_SAVE_CHANGE_IS_LOADING, { value: false, type: preParams.type }); // 结束loading
+      commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
       console.log(error);
       console.log(`${preParams.url}接口异常`);
     }
@@ -160,9 +160,9 @@ const actions = {
         console.log(response.msg);
         // Message.error('保存失败，请稍后重试！');
       }
-      commit(types.DT_SAVE_NEW_OR_SAVE_CHANGE_IS_LOADING, { value: false, type: preParams.type }); // 结束loading
+      commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
     } catch (error) {
-      commit(types.DT_SAVE_NEW_OR_SAVE_CHANGE_IS_LOADING, { value: false, type: preParams.type }); // 结束loading
+      commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
       console.log(error);
       console.log(`${preParams.url}接口异常`);
     }
