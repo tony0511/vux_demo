@@ -1,0 +1,36 @@
+en:
+  貌似示例不存在: 'Sorry, demo doesn''t exist'
+  Grid: Grid
+  'Date: 2018-08-01': 'Date: 2018-08-01'
+  switch red: '<span style="color:red">I am Red.</span>'
+  Toggle format: Toggle format
+  'If not, the height of calendar would change': 'If not, the height of calendar would change'
+  As a plugin(>=v0.1.3): As a plugin(>=v0.1.3)
+  Loading...: Loading...
+  Actionsheet header: >-
+    Are you sure?<br/><span style="color:#666;font-size:12px;">Once deleted, you
+    will never find it.</span>
+  '<span style="color:red">Delete</span>': '<span style="color:red">Delete</span>'
+  'Hi, I''m Vux.': 'Hi, I''m Vux.'
+  Set 2017-11-11: Set 2017-11-11
+  Set 2016-08-08: Set 2016-08-08
+  Show popup with datetime-view: Show popup with datetime-view
+  $1024: $1024
+  Current value: Current value
+zh-CN:
+  貌似示例不存在: 貌似示例不存在
+  Grid: 九宫格
+  'Date: 2018-08-01': 日期：2018-08-01
+  switch red: '<span style="color:red">我是红色</span>'
+  Toggle format: 切换时间格式
+  'If not, the height of calendar would change': 否则，日历的高度会发生改变
+  As a plugin(>=v0.1.3): 插件形式调用
+  Loading...: 努力加载中
+  Actionsheet header: '确定咩?<br/><span style="color:#666;font-size:12px;">删除后就无法撤消了哦</span>'
+  '<span style="color:red">Delete</span>': '<span style="color:red">删除</span>'
+  'Hi, I''m Vux.': 你好哇，感谢关注 Vux
+  Set 2017-11-11: 设置为 2017-11-11
+  Set 2016-08-08: 设置为 2016-08-08
+  Show popup with datetime-view: 显示弹窗样式
+  $1024: ￥1024
+  Current value: 选中值为

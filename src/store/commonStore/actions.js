@@ -1,15 +1,17 @@
 // 公共 actions
-// import { Message } from 'element-ui';
+import { Alert } from 'vux';
 import router from '@/router';
 import * as types from './mutation-types';
 import Api from '../../api';
 
+console.log('Alert====', Alert);
 const actions = {
   /*
    *只要求返回状态，不要求存储数据
    */
   async onlyStatusGet({ commit }, preParams) { // eslint-disable-line
     try {
+      console.log('==---=', this); // eslint-disable-line
       const params = preParams;
       const response = await Api.common.get(params);
       if (response.status === 200) { // 成功
@@ -42,7 +44,6 @@ const actions = {
   async noLoadingDataGet({ commit }, preParams) { // eslint-disable-line
     try {
       const response = await Api.common.get(preParams);
-      // console.log(response);
       if (response.status === 200) { // 成功
         commit(types.SAVE_DATA, { value: response.result, type: preParams.type }); // 保存数据
         return response;
@@ -58,7 +59,6 @@ const actions = {
   async noLoadingDataPost({ commit }, preParams) { // eslint-disable-line
     try {
       const response = await Api.common.post(preParams);
-      // console.log(response);
       if (response.status === 200) { // 成功
         commit(types.SAVE_DATA, { value: response.result, type: preParams.type }); // 保存数据
         return response;

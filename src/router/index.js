@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { CloseDialogsPlugin } from 'vux';
 import orderRouter from './orderRouter';
 
 import Login from '../views/Login';
@@ -50,6 +51,8 @@ const router = new VueRouter({
   routes,
 });
 
+Vue.use(CloseDialogsPlugin, router); // 切换路由的时候关闭弹窗
+
 // router.beforeEach((to, from, next) => {
 //   if (to.path === '/login') {
 //     sessionStorage.removeItem('user');
@@ -65,6 +68,7 @@ const router = new VueRouter({
 // 动态设置页面title
 router.afterEach((to) => {
   document.title = `${to.meta.title}`;
+  // console.log('router--$vux==', Vue.$vux);
 });
 
 export default router;

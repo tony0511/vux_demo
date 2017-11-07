@@ -61,13 +61,13 @@ module.exports = {
     //     return source
     //   }
     // },
-    // {
-    //   name: 'i18n',
-    //   vuxStaticReplace: false,
-    //   staticReplace: false,
-    //   extractToFiles: 'src/locales/components.yml',
-    //   localeList: ['en', 'zh-CN']
-    // },
+    {
+      name: 'i18n', // i18n插件
+      vuxStaticReplace: false,
+      staticReplace: false,
+      extractToFiles: 'src/locales/components.yml', // 组件中的语言类型代码编译后会统一集中到该文件中
+      localeList: ['en', 'zh-CN'], // 语言类型种类
+    },
     // {
     //   name: 'less-theme',
     //   path: 'src/theme.less'

@@ -5,7 +5,7 @@ const commonApi = {
     公共接口
   */
   get(preParams) { // 一般get请求
-    return fetch.post(preParams.url, preParams.params);
+    return fetch.get(preParams.url, preParams.params);
   },
   post(preParams) { // 一般post请求
     return fetch.post(preParams.url, preParams.params);
