@@ -2,23 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import FastClick from 'fastclick';
-// import VueRouter from 'vue-router';
 import { ToastPlugin, AlertPlugin, BusPlugin } from 'vux';
 import store from './store';
 import router from './router';
 import App from './App';
-// import Home from './components/HelloFromVux';
 
-// Vue.use(VueRouter);
-
-// const routes = [{
-//   path: '/',
-//   component: Home,
-// }];
-
-// const router = new VueRouter({
-//   routes,
-// });
+require('es6-promise').polyfill(); // 兼容 IE 不支持 promise 处理
 
 // 使用 plugins
 // Vue.use(DevicePlugin);
@@ -29,7 +18,6 @@ Vue.use(AlertPlugin);
 Vue.use(BusPlugin);
 // Vue.use(DatetimePlugin);
 
-// console.log('===', Vue.$vux);
 FastClick.attach(document.body); // 移除移动端点击延迟
 
 Vue.config.productionTip = false;

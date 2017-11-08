@@ -42,7 +42,7 @@ module.exports = {
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'max-len': [1, 30000], // 强制行的最大长度 (max-len)。 fix
+    'max-len': [1, 30000], // 强制行的最大长度 (max-len)
     'linebreak-style': 0, // 忽略换行符格式不一样
     'no-console': 0, // 忽略console日志警告
     'no-param-reassign': 0, // 忽略函数参数的修改报错
