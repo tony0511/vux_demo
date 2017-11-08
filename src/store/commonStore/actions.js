@@ -1,17 +1,14 @@
 // 公共 actions
-import { Alert } from 'vux';
 import router from '@/router';
 import * as types from './mutation-types';
 import Api from '../../api';
 
-console.log('Alert====', Alert);
 const actions = {
   /*
    *只要求返回状态，不要求存储数据
    */
   async onlyStatusGet({ commit }, preParams) { // eslint-disable-line
     try {
-      console.log('==---=', this); // eslint-disable-line
       const params = preParams;
       const response = await Api.common.get(params);
       if (response.status === 200) { // 成功
@@ -43,12 +40,13 @@ const actions = {
    */
   async noLoadingDataGet({ commit }, preParams) { // eslint-disable-line
     try {
+      const vuxToast = preParams.self.$vux.toast;
       const response = await Api.common.get(preParams);
       if (response.status === 200) { // 成功
         commit(types.SAVE_DATA, { value: response.result, type: preParams.type }); // 保存数据
         return response;
       } else if (response.status === 500) {  // 失败
-        // Message.error(response.msg);
+        vuxToast.text(response.msg);
         return response;
       }
     } catch (error) {
@@ -58,12 +56,13 @@ const actions = {
   },
   async noLoadingDataPost({ commit }, preParams) { // eslint-disable-line
     try {
+      const vuxToast = preParams.self.$vux.toast;
       const response = await Api.common.post(preParams);
       if (response.status === 200) { // 成功
         commit(types.SAVE_DATA, { value: response.result, type: preParams.type }); // 保存数据
         return response;
       } else if (response.status === 500) {  // 失败
-        // Message.error(response.msg);
+        vuxToast.text(response.msg);
         return response;
       }
     } catch (error) {
@@ -76,6 +75,7 @@ const actions = {
    */
   async hasLoadingDataGet({ commit }, preParams) { // eslint-disable-line
     try {
+      const vuxToast = preParams.self.$vux.toast;
       commit(types.SAVE_DATA_LOADING, { value: true, type: preParams.type }); // 开始loading
       const response = await Api.common.get(preParams);
       if (response.status === 200) { // 成功
@@ -83,7 +83,7 @@ const actions = {
         commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
         return response;
       } else if (response.status === 500) {  // 失败
-        // Message.error(response.msg);
+        vuxToast.text(response.msg);
         commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
         return response;
       }
@@ -96,6 +96,7 @@ const actions = {
   },
   async hasLoadingDataPost({ commit }, preParams) { // eslint-disable-line
     try {
+      const vuxToast = preParams.self.$vux.toast;
       commit(types.SAVE_DATA_LOADING, { value: true, type: preParams.type }); // 开始loading
       const response = await Api.common.post(preParams);
       if (response.status === 200) { // 成功
@@ -103,7 +104,7 @@ const actions = {
         commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
         return response;
       } else if (response.status === 500) {  // 失败
-        // Message.error(response.msg);
+        vuxToast.text(response.msg);
         commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
         return response;
       }
@@ -117,23 +118,24 @@ const actions = {
   /*
    *保存新增或修改
    */
-  async saveDataHasTipGet({ commit }, preParams) {
+  async saveDataHasTipLoadingGet({ commit }, preParams) {
     try {
+      const vuxToast = preParams.self.$vux.toast;
       commit(types.SAVE_DATA_LOADING, { value: true, type: preParams.type }); // 开始loading
       const params = preParams;
       const response = await Api.common.get(params);
       if (response.status === 200) { // 成功
         if (response.result === 'success') {
-          // Message.success('保存成功！');
+          vuxToast.text(`${preParams.tip}成功`);
           router.back(-1);  // 返回前一页
         } else if (response.result === 'fail') {
-          // Message.error('保存失败，请稍后重试！');
+          vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
         }
       } else if (response.status === 500) {  // 失败，服务器异常
-        // Message.error('保存失败，请稍后重试！');
+        vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
       } else if (response.status === 412) {  // 失败，传入数据参数有误
         console.log(response.msg);
-        // Message.error('保存失败，请稍后重试！');
+        vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
       }
       commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
     } catch (error) {
@@ -142,23 +144,24 @@ const actions = {
       console.log(`${preParams.url}接口异常`);
     }
   },
-  async saveDataHasTipPost({ commit }, preParams) {
+  async saveDataHasTipLoadingPost({ commit }, preParams) {
     try {
+      const vuxToast = preParams.self.$vux.toast;
       commit(types.SAVE_DATA_LOADING, { value: true, type: preParams.type }); // 开始loading
       const params = preParams;
       const response = await Api.common.post(params);
       if (response.status === 200) { // 成功
         if (response.result === 'success') {
-          // Message.success('保存成功！');
+          vuxToast.text(`${preParams.tip}成功`);
           router.back(-1);  // 返回前一页
         } else if (response.result === 'fail') {
-          // Message.error('保存失败，请稍后重试！');
+          vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
         }
       } else if (response.status === 500) {  // 失败，服务器异常
-        // Message.error('保存失败，请稍后重试！');
+        vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
       } else if (response.status === 412) {  // 失败，传入数据参数有误
         console.log(response.msg);
-        // Message.error('保存失败，请稍后重试！');
+        vuxToast.text(`${preParams.tip}失败，请稍后重试！`);
       }
       commit(types.SAVE_DATA_LOADING, { value: false, type: preParams.type }); // 结束loading
     } catch (error) {

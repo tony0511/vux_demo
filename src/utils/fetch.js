@@ -25,7 +25,7 @@ service.interceptors.response.use((response) => {
   //   Message.error('没有菜单权限！');
   // }
   if (response.data.code === 407) { // 用户未登录
-    console.log(response.data);
+    // console.log(response.data);
     // MessageBox.alert(response.data.msg, {
     //   title: '温馨提示',
     //   confirmButtonText: '确定',

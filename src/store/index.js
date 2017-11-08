@@ -6,7 +6,7 @@ import { LocalePlugin } from 'vux'; // 获取当地标识符组件
 import commonStore from './commonStore';
 
 Vue.use(Vuex);
-Vue.use(LocalePlugin);
+Vue.use(LocalePlugin); // 使用获取当地标识符插件
 
 // 创建 store 实例
 const store = new Vuex.Store({
@@ -16,11 +16,11 @@ const store = new Vuex.Store({
   },
 });
 
+/* eslint-disable */
 // === 添加 i18n 多语言切换插件 ===
 Vue.use(vuexI18n.plugin, store);
 
-/* eslint-disable */
-const vuxLocales = require('json-loader!yaml-loader!../locales/all.yml');
+const vuxLocales = require('json-loader!yaml-loader!../locales/all.yml'); // 使用json-loader和yaml-loader进行语言文件读取
 const componentsLocales = require('json-loader!yaml-loader!../locales/components.yml');
 const finalLocales = { // 
   'en': objectAssign(vuxLocales['en'], componentsLocales['en']),
@@ -36,5 +36,30 @@ if (/zh/.test(nowLocale)) { // 根据获取到的当地标识符初始化默认�
   Vue.i18n.set('en');
 }
 /* eslint-enable */
+
+// === 注册一个管理导航动画的store模块 ===
+store.registerModule('vux', {
+  state: {
+    demoScrollTop: 0,
+    isLoading: false,
+    direction: 'forward',
+  },
+  mutations: {
+    updateDemoPosition(state, payload) {
+      state.demoScrollTop = payload.top;
+    },
+    updateLoadingStatus(state, payload) {
+      state.isLoading = payload.isLoading;
+    },
+    updateDirection(state, payload) {
+      state.direction = payload.direction;
+    },
+  },
+  actions: {
+    updateDemoPosition({ commit }, top) {
+      commit({ type: 'updateDemoPosition', top });
+    },
+  },
+});
 
 export default store;

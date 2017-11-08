@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { CloseDialogsPlugin } from 'vux';
+import store from '@/store';
 import orderRouter from './orderRouter';
 
 import Login from '../views/Login';
@@ -63,7 +64,37 @@ Vue.use(CloseDialogsPlugin, router); // 切换路由的时候关闭弹窗
 //   } else {
 //     next();
 //   }
-// });;
+// });
+
+// ==== 页面切换动画管理 ====
+const sessionData = window.sessionStorage;
+sessionData.clear();
+let sessionDataCount = sessionData.getItem('count') * 1 || 0;
+sessionData.setItem('/', 0);
+
+router.beforeEach((to, from, next) => {
+  store.commit('updateLoadingStatus', { isLoading: true });
+  const toIndex = sessionData.getItem(to.path);
+  const fromIndex = sessionData.getItem(from.path);
+  if (toIndex) {
+    if (!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
+      store.commit('updateDirection', { direction: 'forward' });
+    } else {
+      store.commit('updateDirection', { direction: 'reverse' });
+    }
+  } else {
+    ++sessionDataCount;
+    sessionData.setItem('count', sessionDataCount);
+    to.path !== '/' && sessionData.setItem(to.path, sessionDataCount);
+    store.commit('updateDirection', { direction: 'forward' });
+  }
+  if (/\/http/.test(to.path)) {
+    const url = to.path.split('http')[1];
+    window.location.href = `http${url}`;
+  } else {
+    next();
+  }
+});
 
 // 动态设置页面title
 router.afterEach((to) => {

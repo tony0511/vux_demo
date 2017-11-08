@@ -15,7 +15,9 @@ module.exports = {
   //   env: 'dev'
   // },
   plugins: [
-    'vux-ui', 'progress-bar', 'duplicate-style',
+    'vux-ui', // 配合babel-loader以正确编译VUX的js源码
+    'progress-bar',
+    'duplicate-style', // 在构建后去除重复css代码
     // {
     //   name: 'duplicate-style',
     //   envs: ['production']
