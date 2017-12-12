@@ -42,7 +42,7 @@
 
 <i18n>
   Current value:
-    zh-CN: 选中值为
+    zh-CN: 选中值为什么
   Set 2017-11-11:
     zh-CN: 设置为 2017-11-11
   Set 2016-08-08:

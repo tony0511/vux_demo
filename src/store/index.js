@@ -20,8 +20,11 @@ const store = new Vuex.Store({
 // === 添加 i18n 多语言切换插件 ===
 Vue.use(vuexI18n.plugin, store);
 
-const vuxLocales = require('json-loader!yaml-loader!../locales/all.yml'); // 使用json-loader和yaml-loader进行语言文件读取
-const componentsLocales = require('json-loader!yaml-loader!../locales/components.yml');
+// const vuxLocales = require('json-loader!yaml-loader!../locales/all.yml'); // 使用json-loader和yaml-loader进行语言文件读取
+// const componentsLocales = require('json-loader!yaml-loader!../locales/components.yml');
+const vuxLocales = require('../locales/all.yml'); // yml 文件处理 loader 放到配置文件里了
+const componentsLocales = require('../locales/components.yml');
+console.log(vuxLocales, componentsLocales);
 const finalLocales = { // 
   'en': objectAssign(vuxLocales['en'], componentsLocales['en']),
   'zh-CN': objectAssign(vuxLocales['zh-CN'], componentsLocales['zh-CN']),
@@ -35,6 +38,7 @@ if (/zh/.test(nowLocale)) { // 根据获取到的当地标识符初始化默认�
 } else {
   Vue.i18n.set('en');
 }
+console.log(Vue.i18n);
 /* eslint-enable */
 
 // === 注册一个管理导航动画的store模块 ===

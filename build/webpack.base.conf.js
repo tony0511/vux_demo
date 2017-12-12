@@ -32,7 +32,6 @@ let webpackConfig = {
     }
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.ProvidePlugin({
       jQuery: "jquery",
       $: "jquery"
@@ -40,6 +39,11 @@ let webpackConfig = {
   ],
   module: {
     rules: [
+      {
+        test: /\.yml$/,
+        use: ['json-loader', 'yaml-loader'],
+        include: [resolve('src'), resolve('test')],
+      },
       {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
