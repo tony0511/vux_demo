@@ -43,38 +43,19 @@ service.interceptors.response.use((response) => {
   return Promise.reject(error);
 });
 
-// 导出一般post和get请求方法
-export function post(url, params) {
-  console.log('postparams====', params);
-  return service.post(url, qs.stringify(params));
+export function post(url, preParams) {
+  if (preParams.requireMode === 'json') return service.post(`/api_service/api/v1/${url}`, preParams.params, { headers: { 'Content-Type': 'application/json' } });
+  if (preParams.requireMode === 'form-data') {
+    const formData = new FormData();
+    Object.keys(preParams.params).forEach((key) => {
+      formData.append(key, preParams.params[key]);
+    });
+    return service.post(`/api_service/api/v1/${url}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  }
+  return service.post(`/api_service/api/v1/${url}`, qs.stringify(preParams.params));
 }
 
-export function get(url, params) {
-  console.log('getparam====', params);
-  return service.get(url, {
-    params,
-  });
-}
-
-// 导出post和get请求方法（添加 form-data 请求头）
-export function postFormData(url, params) {
-  console.log('postparams====', params);
-  const formData = new FormData();
-  Object.keys(params).forEach((key) => {
-    formData.append(key, params[key]);
-  });
-  return service.post(url, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-}
-
-export function getFormData(url, params) {
-  console.log('getparam====', params);
-  const formData = new FormData();
-  Object.keys(params).forEach((key) => {
-    formData.append(key, params[key]);
-  });
-  return service.get(url, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
+export function get(url, preParams) {
+  // console.log('getparam====', preParams);
+  return service.get(`/api_service/api/v1/${url}`, { params: preParams.params });
 }

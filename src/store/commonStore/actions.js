@@ -9,8 +9,8 @@ const actions = {
    */
   async onlyStatusGet({ commit }, preParams) { // eslint-disable-line
     try {
-      const params = preParams;
-      const response = await Api.common.get(params);
+      // const params = preParams;
+      const response = await Api.common.get(preParams);
       if (response.status === 200) { // 成功
         return response;
       } else if (response.status === 500) {  // 失败
@@ -23,8 +23,8 @@ const actions = {
   },
   async onlyStatusPost({ commit }, preParams) { // eslint-disable-line
     try {
-      const params = preParams;
-      const response = await Api.common.post(params);
+      // const params = preParams;
+      const response = await Api.common.post(preParams);
       if (response.status === 200) { // 成功
         return response;
       } else if (response.status === 500) {  // 失败
